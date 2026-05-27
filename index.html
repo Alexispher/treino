@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gracie Barra - Sistema de Musculação e Performance</title>
+    <title>SetLog - Sistema de Musculação e Performance</title>
     <style>
-        /* Cores e Identidade Visual Gracie Barra */
+        /* Cores e Identidade Visual SetLog */
         :root {
             --gb-red: #7A0000;      /* Vermelho Escuro Tradicional */
             --gb-red-hover: #990000;
@@ -65,7 +65,7 @@
             padding: 0 20px;
         }
 
-        .Seccao-titulo {
+        .seccao-titulo {
             margin-bottom: 25px;
         }
 
@@ -171,10 +171,9 @@
 </head>
 <body>
 
-    <!-- Header com a marca Gracie Barra -->
     <header>
         <div class="logo-area">
-            <h1>GRACIE <span>BARRA</span></h1>
+            <h1>SET <span>LOG</span></h1>
         </div>
         <div class="badge-unidade">SISTEMA DE MUSCULAÇÃO</div>
     </header>
@@ -195,26 +194,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- O Node.js/Express vai ler essa lista direto do seu JOIN do banco -->
-                    <% listaTreinos.forEach(item => { %>
+                    <% if (typeof listaTreinos !== 'undefined' && listaTreinos && listaTreinos.length > 0) { %>
+                        <% listaTreinos.forEach(item => { %>
+                            <tr>
+                                <td class="atleta-nome"><%= item.nome || 'Não informado' %></td>
+                                <td class="data-treino">
+                                    <%= item.data_treino ? new Date(item.data_treino).toLocaleDateString('pt-BR', {timeZone: 'UTC'}) : 'N/A' %>
+                                </td>
+                                <td class="exercicio-nome">🏋️‍♂️ <%= item.nome_exercicio || 'Não informado' %></td>
+                                <td>
+                                    <span class="carga-badge"><%= item.carga_kg || 0 %> kg</span>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
                         <tr>
-                            <td class="atleta-nome"><%= item.nome %></td>
-                            <td class="data-treino">
-                                <%= new Date(item.data_treino).toLocaleDateString('pt-BR', {timeZone: 'UTC'}) %>
-                            </td>
-                            <td class="exercicio-nome">🏋️‍♂️ <%= item.nome_exercicio %></td>
-                            <td>
-                                <span class="carga-badge"><%= item.carga_kg %> kg</span>
+                            <td colspan="4" style="text-align: center; color: #888; padding: 30px;">
+                                Nenhum treino ou carga registrado no momento.
                             </td>
                         </tr>
-                    <% }); %>
+                    <% } %>
                 </tbody>
             </table>
         </div>
     </main>
 
     <footer>
-        &copy; 2026 Gracie Barra - Organização de Saúde e Performance. Todos os direitos reservados.
+        &copy; 2026 SetLog - Organização de Saúde e Performance. Todos os direitos reservados.
     </footer>
 
 </body>
