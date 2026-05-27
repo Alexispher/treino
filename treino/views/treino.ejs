@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Sistema de Treino</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background-color: #f7f9fc; color: #333; }
+        h1 { color: #1e293b; border-bottom: 2px solid #cbd5e1; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); background: #fff; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 14px 20px; text-align: left; }
+        th { background-color: #4f46e5; color: white; font-weight: 600; }
+        tr { border-bottom: 1px solid #e2e8f0; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        .badge { background-color: #e0e7ff; color: #4338ca; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>🏋️‍♂️ Painel de Treinos Executados</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Atleta</th>
+                <th>Data do Treino</th>
+                <th>Exercício</th>
+                <th>Carga</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% listaTreinos.forEach(item => { %>
+                <tr>
+                    <td><strong><%= item.nome %></strong></td>
+                    <td>
+                        <%= new Date(item.data_treino).toLocaleDateString('pt-BR', {timeZone: 'UTC'}) %>
+                    </td>
+                    <td><%= item.nome_exercicio %></td>
+                    <td><span class="badge"><%= item.carga_kg %> kg</span></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+</body>
+</html>
