@@ -10,12 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Cores e Identidade Visual SetLog */
         :root {
-            --gb-red: #7A0000;      /* Vermelho Escuro Tradicional */
+            --gb-red: #7A0000;
             --gb-red-hover: #990000;
-            --gb-dark: #1A1A1A;     /* Fundo Escuro Premium */
-            --gb-light: #F4F4F6;    /* Cinza Claro para contraste */
+            --gb-dark: #1A1A1A;
+            --gb-light: #F4F4F6;
             --text-dark: #222222;
             --border-color: #e1e1e6;
         }
@@ -31,13 +30,13 @@
             background-color: var(--gb-light);
             color: var(--text-dark);
             line-height: 1.6;
+            padding-bottom: 50px;
         }
 
-        /* Topo / Header */
         header {
             background-color: var(--gb-dark);
             color: white;
-            padding: 20px 5%; /* Usando porcentagem para melhor adaptação em telas largas/estreitas */
+            padding: 20px 5%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -61,190 +60,201 @@
             padding: 6px 12px;
             font-size: 12px;
             font-weight: 700;
-            border-radius: 6px; /* Borda levemente mais arredondada */
+            border-radius: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        /* Conteúdo Principal */
         main {
-            max-width: 1000px; /* Reduzido levemente para melhor leitura no desktop */
+            max-width: 900px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        .seccao-titulo {
-            margin-bottom: 30px;
-        }
-
-        .seccao-titulo h2 {
-            font-size: 20px;
-            color: var(--gb-dark);
-            text-transform: uppercase;
-            position: relative;
-            padding-bottom: 10px;
-            font-weight: 800;
-        }
-
-        .seccao-titulo h2::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 4px; /* Linha mais espessa */
-            background-color: var(--gb-red);
-            border-radius: 2px;
-        }
-
-        /* Tabela Premium */
-        .tabela-container {
+        /* Formulários e Inputs */
+        .card-form {
             background: white;
-            border-radius: 12px; /* Cantos mais modernos */
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04); /* Sombra mais suave e difusa */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
             border: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
+        input {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            flex-grow: 1;
+            outline: none;
+            transition: border 0.3s;
         }
 
-        th {
+        input:focus {
+            border-color: var(--gb-red);
+        }
+
+        button {
             background-color: var(--gb-dark);
             color: white;
-            padding: 18px 20px;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
             font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: var(--gb-red);
+        }
+
+        .btn-danger {
+            background-color: #ffebe6;
+            color: var(--gb-red);
+            padding: 8px 12px;
+        }
+        
+        .btn-danger:hover {
+            background-color: var(--gb-red);
+            color: white;
+        }
+
+        .btn-edit {
+            background-color: #e6f0ff;
+            color: #0044cc;
+            padding: 8px 12px;
+        }
+
+        .btn-edit:hover {
+            background-color: #0044cc;
+            color: white;
+        }
+
+        /* Lista de Fichas */
+        .ficha-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .ficha-header {
+            background-color: var(--gb-dark);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ficha-header h3 {
+            font-size: 18px;
+            font-weight: 700;
             text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        td {
-            padding: 18px 20px;
+        .ficha-acoes {
+            display: flex;
+            gap: 10px;
+        }
+
+        .ficha-body {
+            padding: 20px;
+        }
+
+        /* Tabela de Exercícios Interna */
+        .add-exercicio-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: var(--gb-light);
+            padding: 15px;
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+
+        .add-exercicio-form input {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .add-exercicio-form input.num-input {
+            flex: 0 0 90px;
+        }
+
+        .exercicios-lista {
+            list-style: none;
+        }
+
+        .exercicios-lista li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
             border-bottom: 1px solid var(--border-color);
-            font-size: 15px;
-            vertical-align: middle;
         }
 
-        tr:last-child td {
+        .exercicios-lista li:last-child {
             border-bottom: none;
         }
 
-        tr:nth-child(even) {
-            background-color: #fafafa;
-        }
-
-        tr:hover td {
-            background-color: #f8f8fb;
-            transition: background 0.3s ease;
-        }
-
-        /* Destaques das Células */
-        .atleta-nome {
-            font-weight: 700;
-            color: var(--gb-dark);
-        }
-
-        .data-treino {
-            color: #666;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .exercicio-nome {
-            color: var(--gb-dark);
+        .ex-nome {
             font-weight: 600;
+            color: var(--gb-dark);
+            flex: 1.5;
         }
 
-        .carga-badge {
+        .ex-detalhes {
+            display: flex;
+            gap: 10px;
+            flex: 2;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            margin-right: 15px;
+        }
+
+        .ex-badge {
+            background-color: #f0f0f5;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid #e1e1e6;
+            white-space: nowrap;
+        }
+
+        .carga-destaque {
             background-color: #ffebe6;
             color: var(--gb-red);
             font-weight: 700;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            display: inline-block;
-            border: 1px solid #ffd1c7;
-            box-shadow: 0 2px 4px rgba(122, 0, 0, 0.05); /* Profundidade na badge */
+            border-color: #ffd1c7;
         }
 
-        /* Rodapé */
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #888;
-            font-size: 13px;
-            margin-top: 40px;
-            font-weight: 500;
-        }
-
-        /* ==========================================================================
-           MODO MOBILE (Transforma a tabela em Cards para telas menores)
-           ========================================================================== */
         @media screen and (max-width: 768px) {
-            header {
+            .exercicios-lista li {
                 flex-direction: column;
-                gap: 15px;
-                text-align: center;
+                align-items: flex-start;
+                gap: 10px;
             }
-
-            .tabela-container {
-                background: transparent;
-                border: none;
-                box-shadow: none;
+            .ex-detalhes {
+                justify-content: flex-start;
+                width: 100%;
+                flex-wrap: wrap;
             }
-
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-
-            /* Esconde o cabeçalho original da tabela, mas mantém acessível para leitores de tela */
-            thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-
-            tr {
-                background-color: white;
-                border: 1px solid var(--border-color);
-                border-radius: 12px;
-                margin-bottom: 15px;
-                padding: 15px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-            }
-
-            tr:hover td {
-                background-color: transparent; /* Remove hover no mobile */
-            }
-
-            td {
-                border-bottom: 1px solid #f0f0f5;
-                position: relative;
-                padding: 12px 0 12px 40%; 
-                text-align: right;
-            }
-
-            td:last-child {
-                border-bottom: none;
-            }
-
-            /* Cria pseudo-elementos usando o atributo data-label do HTML */
-            td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 35%;
-                text-align: left;
-                font-weight: 700;
-                font-size: 12px;
-                color: #888;
-                text-transform: uppercase;
+            .btn-danger {
+                width: 100%;
             }
         }
     </style>
@@ -255,55 +265,162 @@
         <div class="logo-area">
             <h1>SET<span>LOG</span></h1>
         </div>
-        <div class="badge-unidade">Diário Pessoal</div>
+        <div class="badge-unidade">Minhas Fichas</div>
     </header>
 
     <main>
-        <div class="seccao-titulo">
-            <h2>Últimos Registros</h2>
+        <div class="card-form">
+            <input type="text" id="novaFichaNome" placeholder="Ex: Ficha A - Peito e Tríceps" autocomplete="off">
+            <button onclick="adicionarFicha()">+ Criar Nova Ficha</button>
         </div>
 
-        <div class="tabela-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Atleta</th>
-                        <th>Data</th>
-                        <th>Exercício</th>
-                        <th>Carga Máxima</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if (typeof listaTreinos !== 'undefined' && listaTreinos && listaTreinos.length > 0) { %>
-                        <% listaTreinos.forEach(item => { %>
-                            <tr>
-                                <td data-label="Atleta" class="atleta-nome"><%= item.nome || 'Não informado' %></td>
-                                <td data-label="Data" class="data-treino">
-                                    <%= item.data_treino ? new Date(item.data_treino).toLocaleDateString('pt-BR', {timeZone: 'UTC'}) : 'N/A' %>
-                                </td>
-                                <td data-label="Exercício" class="exercicio-nome">🏋️‍♂️ <%= item.nome_exercicio || 'Não informado' %></td>
-                                <td data-label="Carga">
-                                    <span class="carga-badge"><%= item.carga_kg || 0 %> kg</span>
-                                </td>
-                            </tr>
-                        <% }); %>
-                    <% } else { %>
-                        <tr>
-                            <td colspan="4" style="text-align: center; color: #888; padding: 40px 20px;">
-                                <div style="font-size: 30px; margin-bottom: 10px;">📉</div>
-                                <strong style="color: var(--gb-dark);">Nenhum treino registrado</strong><br>
-                                Comece a anotar suas cargas para acompanhar sua evolução.
-                            </td>
-                        </tr>
-                    <% } %>
-                </tbody>
-            </table>
-        </div>
+        <div id="containerFichas"></div>
     </main>
 
-    <footer>
-        &copy; 2026 SetLog - Seu Diário de Performance
-    </footer>
+    <script>
+        let fichas = JSON.parse(localStorage.getItem('setlog_fichas')) || [];
 
+        function salvarDados() {
+            localStorage.setItem('setlog_fichas', JSON.stringify(fichas));
+            renderizarFichas();
+        }
+
+        function adicionarFicha() {
+            const inputNome = document.getElementById('novaFichaNome');
+            const nome = inputNome.value.trim();
+            
+            if (nome === '') {
+                alert('Digite um nome para a ficha!');
+                return;
+            }
+
+            const novaFicha = {
+                id: Date.now(),
+                nome: nome,
+                exercicios: []
+            };
+
+            fichas.push(novaFicha);
+            inputNome.value = '';
+            salvarDados();
+        }
+
+        function deletarFicha(id) {
+            if(confirm('Tem certeza que deseja excluir esta ficha inteira?')) {
+                fichas = fichas.filter(ficha => ficha.id !== id);
+                salvarDados();
+            }
+        }
+
+        function editarFicha(id) {
+            const ficha = fichas.find(f => f.id === id);
+            const novoNome = prompt('Digite o novo nome da ficha:', ficha.nome);
+            
+            if (novoNome !== null && novoNome.trim() !== '') {
+                ficha.nome = novoNome.trim();
+                salvarDados();
+            }
+        }
+
+        function adicionarExercicio(fichaId) {
+            const nomeInput = document.getElementById(`exNome_${fichaId}`);
+            const seriesInput = document.getElementById(`exSeries_${fichaId}`);
+            const repsInput = document.getElementById(`exReps_${fichaId}`);
+            const cargaInput = document.getElementById(`exCarga_${fichaId}`);
+
+            const nome = nomeInput.value.trim();
+            const series = seriesInput.value;
+            const reps = repsInput.value;
+            const carga = cargaInput.value;
+
+            // Validação agora exige a carga
+            if (nome === '' || series === '' || reps === '' || carga === '') {
+                alert('Preencha todos os campos do exercício, incluindo a carga!');
+                return;
+            }
+
+            const fichaIndex = fichas.findIndex(f => f.id === fichaId);
+            
+            fichas[fichaIndex].exercicios.push({
+                idExercicio: Date.now(),
+                nome: nome,
+                series: series,
+                reps: reps,
+                carga: carga // Salvando a carga no objeto
+            });
+
+            salvarDados();
+        }
+
+        function deletarExercicio(fichaId, idExercicio) {
+            const fichaIndex = fichas.findIndex(f => f.id === fichaId);
+            fichas[fichaIndex].exercicios = fichas[fichaIndex].exercicios.filter(ex => ex.idExercicio !== idExercicio);
+            salvarDados();
+        }
+
+        function renderizarFichas() {
+            const container = document.getElementById('containerFichas');
+            container.innerHTML = '';
+
+            if (fichas.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; color: #888; padding: 40px; background: white; border-radius: 12px;">
+                        <h3>Nenhuma ficha cadastrada</h3>
+                        <p>Comece criando sua primeira ficha de treino acima!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            fichas.forEach(ficha => {
+                let listaExerciciosHTML = '';
+                if (ficha.exercicios.length === 0) {
+                    listaExerciciosHTML = `<p style="text-align: center; color: #888; font-size: 14px; margin: 15px 0;">Nenhum exercício adicionado ainda.</p>`;
+                } else {
+                    ficha.exercicios.forEach(ex => {
+                        listaExerciciosHTML += `
+                            <li>
+                                <div class="ex-nome">🏋️‍♂️ ${ex.nome}</div>
+                                <div class="ex-detalhes">
+                                    <span class="ex-badge">${ex.series} Séries</span>
+                                    <span class="ex-badge">${ex.reps} Reps</span>
+                                    <span class="ex-badge carga-destaque">${ex.carga} kg</span>
+                                </div>
+                                <button class="btn-danger" onclick="deletarExercicio(${ficha.id}, ${ex.idExercicio})">Excluir</button>
+                            </li>
+                        `;
+                    });
+                }
+
+                const cardFicha = `
+                    <div class="ficha-card">
+                        <div class="ficha-header">
+                            <h3>📋 ${ficha.nome}</h3>
+                            <div class="ficha-acoes">
+                                <button class="btn-edit" onclick="editarFicha(${ficha.id})">✏️ Renomear</button>
+                                <button class="btn-danger" onclick="deletarFicha(${ficha.id})">🗑️ Excluir Ficha</button>
+                            </div>
+                        </div>
+                        <div class="ficha-body">
+                            <div class="add-exercicio-form">
+                                <input type="text" id="exNome_${ficha.id}" placeholder="Exercício (Ex: Supino)">
+                                <input type="number" id="exSeries_${ficha.id}" class="num-input" placeholder="Séries" min="1">
+                                <input type="number" id="exReps_${ficha.id}" class="num-input" placeholder="Reps" min="1">
+                                <input type="number" id="exCarga_${ficha.id}" class="num-input" placeholder="Carga (kg)" min="0" step="0.5">
+                                <button onclick="adicionarExercicio(${ficha.id})">+ Add</button>
+                            </div>
+
+                            <ul class="exercicios-lista">
+                                ${listaExerciciosHTML}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardFicha;
+            });
+        }
+
+        renderizarFichas();
+    </script>
 </body>
 </html>
