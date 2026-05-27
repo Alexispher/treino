@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracie Barra - Sistema de Musculação e Performance</title>
+    <style>
+        /* Cores e Identidade Visual Gracie Barra */
+        :root {
+            --gb-red: #7A0000;      /* Vermelho Escuro Tradicional */
+            --gb-red-hover: #990000;
+            --gb-dark: #1A1A1A;     /* Fundo Escuro Premium */
+            --gb-light: #F4F4F6;    /* Cinza Claro para contraste */
+            --text-dark: #222222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--gb-light);
+            color: var(--text-dark);
+        }
+
+        /* Topo / Header */
+        header {
+            background-color: var(--gb-dark);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 4px solid var(--gb-red);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo-area h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .logo-area span {
+            color: var(--gb-red);
+        }
+
+        .badge-unidade {
+            background-color: var(--gb-red);
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Conteúdo Principal */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .Seccao-titulo {
+            margin-bottom: 25px;
+        }
+
+        .seccao-titulo h2 {
+            font-size: 22px;
+            color: var(--gb-dark);
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .seccao-titulo h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--gb-red);
+        }
+
+        /* Tabela Premium */
+        .tabela-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e1e1e6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--gb-dark);
+            color: white;
+            padding: 16px 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #ededf2;
+            font-size: 15px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        tr:hover {
+            background-color: #f1f1f5;
+            transition: background 0.2s ease;
+        }
+
+        /* Destaques das Células */
+        .atleta-nome {
+            font-weight: 700;
+            color: var(--gb-dark);
+        }
+
+        .data-treino {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .exercicio-nome {
+            color: var(--gb-dark);
+            font-weight: 500;
+        }
+
+        .carga-badge {
+            background-color: #ffebe6;
+            color: var(--gb-red);
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: inline-block;
+            border: 1px solid #ffd1c7;
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-size: 13px;
+            margin-top: 60px;
+            border-top: 1px solid #e1e1e6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header com a marca Gracie Barra -->
+    <header>
+        <div class="logo-area">
+            <h1>GRACIE <span>BARRA</span></h1>
+        </div>
+        <div class="badge-unidade">SISTEMA DE MUSCULAÇÃO</div>
+    </header>
+
+    <main>
+        <div class="seccao-titulo">
+            <h2>Cargas e Treinos de Musculação Registrados</h2>
+        </div>
+
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Atleta</th>
+                        <th>Data da Sessão</th>
+                        <th>Exercício de Musculação</th>
+                        <th>Carga Atual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- O Node.js/Express vai ler essa lista direto do seu JOIN do banco -->
+                    <% listaTreinos.forEach(item => { %>
+                        <tr>
+                            <td class="atleta-nome"><%= item.nome %></td>
+                            <td class="data-treino">
+                                <%= new Date(item.data_treino).toLocaleDateString('pt-BR', {timeZone: 'UTC'}) %>
+                            </td>
+                            <td class="exercicio-nome">🏋️‍♂️ <%= item.nome_exercicio %></td>
+                            <td>
+                                <span class="carga-badge"><%= item.carga_kg %> kg</span>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Gracie Barra - Organização de Saúde e Performance. Todos os direitos reservados.
+    </footer>
+
+</body>
+</html>
