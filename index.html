@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SetLog - Sistema de Musculação e Performance</title>
+    <title>SetLog - Diário de Treino Pessoal</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         /* Cores e Identidade Visual SetLog */
         :root {
@@ -12,25 +17,27 @@
             --gb-dark: #1A1A1A;     /* Fundo Escuro Premium */
             --gb-light: #F4F4F6;    /* Cinza Claro para contraste */
             --text-dark: #222222;
+            --border-color: #e1e1e6;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
             background-color: var(--gb-light);
             color: var(--text-dark);
+            line-height: 1.6;
         }
 
         /* Topo / Header */
         header {
             background-color: var(--gb-dark);
             color: white;
-            padding: 20px 40px;
+            padding: 20px 5%; /* Usando porcentagem para melhor adaptação em telas largas/estreitas */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -53,28 +60,30 @@
             background-color: var(--gb-red);
             padding: 6px 12px;
             font-size: 12px;
-            font-weight: bold;
-            border-radius: 4px;
+            font-weight: 700;
+            border-radius: 6px; /* Borda levemente mais arredondada */
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* Conteúdo Principal */
         main {
-            max-width: 1200px;
+            max-width: 1000px; /* Reduzido levemente para melhor leitura no desktop */
             margin: 40px auto;
             padding: 0 20px;
         }
 
         .seccao-titulo {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .seccao-titulo h2 {
-            font-size: 22px;
+            font-size: 20px;
             color: var(--gb-dark);
             text-transform: uppercase;
             position: relative;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
+            font-weight: 800;
         }
 
         .seccao-titulo h2::after {
@@ -82,18 +91,19 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            width: 60px;
-            height: 3px;
+            width: 50px;
+            height: 4px; /* Linha mais espessa */
             background-color: var(--gb-red);
+            border-radius: 2px;
         }
 
         /* Tabela Premium */
         .tabela-container {
             background: white;
-            border-radius: 8px;
+            border-radius: 12px; /* Cantos mais modernos */
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e1e1e6;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04); /* Sombra mais suave e difusa */
+            border: 1px solid var(--border-color);
         }
 
         table {
@@ -105,7 +115,7 @@
         th {
             background-color: var(--gb-dark);
             color: white;
-            padding: 16px 20px;
+            padding: 18px 20px;
             font-weight: 600;
             text-transform: uppercase;
             font-size: 13px;
@@ -113,9 +123,10 @@
         }
 
         td {
-            padding: 16px 20px;
-            border-bottom: 1px solid #ededf2;
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border-color);
             font-size: 15px;
+            vertical-align: middle;
         }
 
         tr:last-child td {
@@ -126,9 +137,9 @@
             background-color: #fafafa;
         }
 
-        tr:hover {
-            background-color: #f1f1f5;
-            transition: background 0.2s ease;
+        tr:hover td {
+            background-color: #f8f8fb;
+            transition: background 0.3s ease;
         }
 
         /* Destaques das Células */
@@ -140,22 +151,24 @@
         .data-treino {
             color: #666;
             font-size: 14px;
+            font-weight: 500;
         }
 
         .exercicio-nome {
             color: var(--gb-dark);
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .carga-badge {
             background-color: #ffebe6;
             color: var(--gb-red);
             font-weight: 700;
-            padding: 5px 10px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
             font-size: 14px;
             display: inline-block;
             border: 1px solid #ffd1c7;
+            box-shadow: 0 2px 4px rgba(122, 0, 0, 0.05); /* Profundidade na badge */
         }
 
         /* Rodapé */
@@ -164,8 +177,75 @@
             padding: 30px;
             color: #888;
             font-size: 13px;
-            margin-top: 60px;
-            border-top: 1px solid #e1e1e6;
+            margin-top: 40px;
+            font-weight: 500;
+        }
+
+        /* ==========================================================================
+           MODO MOBILE (Transforma a tabela em Cards para telas menores)
+           ========================================================================== */
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .tabela-container {
+                background: transparent;
+                border: none;
+                box-shadow: none;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            /* Esconde o cabeçalho original da tabela, mas mantém acessível para leitores de tela */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                background-color: white;
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                margin-bottom: 15px;
+                padding: 15px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            }
+
+            tr:hover td {
+                background-color: transparent; /* Remove hover no mobile */
+            }
+
+            td {
+                border-bottom: 1px solid #f0f0f5;
+                position: relative;
+                padding: 12px 0 12px 40%; 
+                text-align: right;
+            }
+
+            td:last-child {
+                border-bottom: none;
+            }
+
+            /* Cria pseudo-elementos usando o atributo data-label do HTML */
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 35%;
+                text-align: left;
+                font-weight: 700;
+                font-size: 12px;
+                color: #888;
+                text-transform: uppercase;
+            }
         }
     </style>
 </head>
@@ -173,14 +253,14 @@
 
     <header>
         <div class="logo-area">
-            <h1>SET <span>LOG</span></h1>
+            <h1>SET<span>LOG</span></h1>
         </div>
-        <div class="badge-unidade">SISTEMA DE MUSCULAÇÃO</div>
+        <div class="badge-unidade">Diário Pessoal</div>
     </header>
 
     <main>
         <div class="seccao-titulo">
-            <h2>Cargas e Treinos de Musculação Registrados</h2>
+            <h2>Últimos Registros</h2>
         </div>
 
         <div class="tabela-container">
@@ -188,29 +268,31 @@
                 <thead>
                     <tr>
                         <th>Atleta</th>
-                        <th>Data da Sessão</th>
-                        <th>Exercício de Musculação</th>
-                        <th>Carga Atual</th>
+                        <th>Data</th>
+                        <th>Exercício</th>
+                        <th>Carga Máxima</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% if (typeof listaTreinos !== 'undefined' && listaTreinos && listaTreinos.length > 0) { %>
                         <% listaTreinos.forEach(item => { %>
                             <tr>
-                                <td class="atleta-nome"><%= item.nome || 'Não informado' %></td>
-                                <td class="data-treino">
+                                <td data-label="Atleta" class="atleta-nome"><%= item.nome || 'Não informado' %></td>
+                                <td data-label="Data" class="data-treino">
                                     <%= item.data_treino ? new Date(item.data_treino).toLocaleDateString('pt-BR', {timeZone: 'UTC'}) : 'N/A' %>
                                 </td>
-                                <td class="exercicio-nome">🏋️‍♂️ <%= item.nome_exercicio || 'Não informado' %></td>
-                                <td>
+                                <td data-label="Exercício" class="exercicio-nome">🏋️‍♂️ <%= item.nome_exercicio || 'Não informado' %></td>
+                                <td data-label="Carga">
                                     <span class="carga-badge"><%= item.carga_kg || 0 %> kg</span>
                                 </td>
                             </tr>
                         <% }); %>
                     <% } else { %>
                         <tr>
-                            <td colspan="4" style="text-align: center; color: #888; padding: 30px;">
-                                Nenhum treino ou carga registrado no momento.
+                            <td colspan="4" style="text-align: center; color: #888; padding: 40px 20px;">
+                                <div style="font-size: 30px; margin-bottom: 10px;">📉</div>
+                                <strong style="color: var(--gb-dark);">Nenhum treino registrado</strong><br>
+                                Comece a anotar suas cargas para acompanhar sua evolução.
                             </td>
                         </tr>
                     <% } %>
@@ -220,7 +302,7 @@
     </main>
 
     <footer>
-        &copy; 2026 SetLog - Organização de Saúde e Performance. Todos os direitos reservados.
+        &copy; 2026 SetLog - Seu Diário de Performance
     </footer>
 
 </body>
