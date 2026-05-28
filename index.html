@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetLog - Diário de Treino Pessoal</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gb-red: #7A0000;
+            --gb-red-hover: #990000;
+            --gb-dark: #1A1A1A;
+            --gb-light: #F4F4F6;
+            --text-dark: #222222;
+            --border-color: #e1e1e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--gb-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background-color: var(--gb-dark);
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 4px solid var(--gb-red);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-area h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .logo-area span {
+            color: var(--gb-red);
+        }
+
+        /* Área do Perfil no Header */
+        .header-perfil-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .badge-dados {
+            background-color: #333;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .badge-dados strong {
+            color: var(--gb-red);
+        }
+
+        .btn-header-edit {
+            background-color: var(--gb-red);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+        }
+        
+        .btn-header-edit:hover {
+            background-color: var(--gb-red-hover);
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Seção de Criar Perfil */
+        .perfil-setup {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .perfil-setup h2 {
+            margin-bottom: 20px;
+            color: var(--gb-dark);
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group select, 
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .btn-block {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        /* Formulários e Inputs Gerais */
+        .card-form {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        input {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            flex-grow: 1;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--gb-red);
+        }
+
+        button {
+            background-color: var(--gb-dark);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: var(--gb-red);
+        }
+
+        .btn-danger {
+            background-color: #ffebe6;
+            color: var(--gb-red);
+            padding: 8px 12px;
+        }
+        
+        .btn-danger:hover {
+            background-color: var(--gb-red);
+            color: white;
+        }
+
+        .btn-edit {
+            background-color: #e6f0ff;
+            color: #0044cc;
+            padding: 8px 12px;
+        }
+
+        .btn-edit:hover {
+            background-color: #0044cc;
+            color: white;
+        }
+
+        /* Lista de Fichas */
+        .ficha-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .ficha-header {
+            background-color: var(--gb-dark);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ficha-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ficha-acoes {
+            display: flex;
+            gap: 10px;
+        }
+
+        .ficha-body {
+            padding: 20px;
+        }
+
+        /* Tabela de Exercícios Interna */
+        .add-exercicio-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: var(--gb-light);
+            padding: 15px;
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+
+        .add-exercicio-form input {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .add-exercicio-form input.num-input {
+            flex: 0 0 90px;
+        }
+
+        .exercicios-lista {
+            list-style: none;
+        }
+
+        .exercicios-lista li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .exercicios-lista li:last-child {
+            border-bottom: none;
+        }
+
+        .ex-nome {
+            font-weight: 600;
+            color: var(--gb-dark);
+            flex: 1.5;
+        }
+
+        .ex-detalhes {
+            display: flex;
+            gap: 10px;
+            flex: 2;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            margin-right: 15px;
+        }
+
+        .ex-badge {
+            background-color: #f0f0f5;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid #e1e1e6;
+            white-space: nowrap;
+        }
+
+        .carga-destaque {
+            background-color: #ffebe6;
+            color: var(--gb-red);
+            font-weight: 700;
+            border-color: #ffd1c7;
+        }
+
+        @media screen and (max-width: 768px) {
+            .exercicios-lista li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .ex-detalhes {
+                justify-content: flex-start;
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            .btn-danger {
+                width: 100%;
+            }
+            .header-perfil-info {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>SET<span>LOG</span></h1>
+        </div>
+        <div id="headerPerfil" class="header-perfil-info" style="display: none;">
+            <!-- Preenchido via JavaScript -->
+        </div>
+    </header>
+
+    <main>
+        <!-- TELA DE CRIAÇÃO DE PERFIL -->
+        <div id="sectionPerfil" class="perfil-setup" style="display: none;">
+            <h2>👤 Configure seu Perfil</h2>
+            
+            <div class="form-group">
+                <label for="inputNome">Nome</label>
+                <input type="text" id="inputNome" placeholder="Seu nome" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="inputPeso">Peso (kg)</label>
+                <input type="number" id="inputPeso" placeholder="Ex: 75.5" step="0.1" min="20">
+            </div>
+
+            <div class="form-group">
+                <label for="inputAltura">Altura (cm)</label>
+                <input type="number" id="inputAltura" placeholder="Ex: 175" min="50">
+            </div>
+
+            <div class="form-group">
+                <label for="inputGenero">Gênero</label>
+                <select id="inputGenero">
+                    <option value="" disabled selected>Selecione...</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                </select>
+            </div>
+
+            <button class="btn-block" onclick="salvarPerfil()">Salvar e Começar</button>
+        </div>
+
+        <!-- TELA PRINCIPAL (FICHAS DE TREINO) -->
+        <div id="sectionFichas" style="display: none;">
+            <div class="card-form">
+                <input type="text" id="novaFichaNome" placeholder="Ex: Ficha A - Peito e Tríceps" autocomplete="off">
+                <button onclick="adicionarFicha()">+ Criar Nova Ficha</button>
+            </div>
+
+            <div id="containerFichas"></div>
+        </div>
+    </main>
+
+    <script>
+        // --- GERENCIAMENTO DE DADOS ---
+        let fichas = JSON.parse(localStorage.getItem('setlog_fichas')) || [];
+        let perfil = JSON.parse(localStorage.getItem('setlog_perfil')) || null;
+
+        // --- INICIALIZAÇÃO DA INTERFACE ---
+        function carregarInterface() {
+            const sectionPerfil = document.getElementById('sectionPerfil');
+            const sectionFichas = document.getElementById('sectionFichas');
+            const headerPerfil = document.getElementById('headerPerfil');
+
+            if (!perfil) {
+                // Se não tiver perfil, mostra a tela de configuração
+                sectionPerfil.style.display = 'block';
+                sectionFichas.style.display = 'none';
+                headerPerfil.style.display = 'none';
+            } else {
+                // Se tiver perfil, mostra as fichas e os dados no cabeçalho
+                sectionPerfil.style.display = 'none';
+                sectionFichas.style.display = 'block';
+                headerPerfil.style.display = 'flex';
+                
+                // Atualiza as informações do cabeçalho
+                headerPerfil.innerHTML = `
+                    <div class="badge-dados">
+                        Olá, <strong>${perfil.nome}</strong> | ${perfil.peso}kg | ${perfil.altura}cm
+                    </div>
+                    <button class="btn-header-edit" onclick="editarPerfil()">Editar Perfil</button>
+                `;
+                
+                renderizarFichas();
+            }
+        }
+
+        // --- FUNÇÕES DE PERFIL ---
+        function salvarPerfil() {
+            const nome = document.getElementById('inputNome').value.trim();
+            const peso = document.getElementById('inputPeso').value;
+            const altura = document.getElementById('inputAltura').value;
+            const genero = document.getElementById('inputGenero').value;
+
+            if (!nome || !peso || !altura || !genero) {
+                alert("Por favor, preencha todos os campos do perfil!");
+                return;
+            }
+
+            perfil = {
+                nome: nome,
+                peso: peso,
+                altura: altura,
+                genero: genero
+            };
+
+            localStorage.setItem('setlog_perfil', JSON.stringify(perfil));
+            carregarInterface();
+        }
+
+        function editarPerfil() {
+            // Preenche o formulário com os dados atuais
+            document.getElementById('inputNome').value = perfil.nome;
+            document.getElementById('inputPeso').value = perfil.peso;
+            document.getElementById('inputAltura').value = perfil.altura;
+            document.getElementById('inputGenero').value = perfil.genero;
+            
+            // "Remove" o perfil temporariamente da memória para forçar a tela de setup a aparecer
+            perfil = null; 
+            carregarInterface();
+        }
+
+        // --- FUNÇÕES DE FICHAS E EXERCÍCIOS ---
+        function salvarDadosTreino() {
+            localStorage.setItem('setlog_fichas', JSON.stringify(fichas));
+            renderizarFichas();
+        }
+
+        function adicionarFicha() {
+            const inputNome = document.getElementById('novaFichaNome');
+            const nome = inputNome.value.trim();
+            
+            if (nome === '') {
+                alert('Digite um nome para a ficha!');
+                return;
+            }
+
+            const novaFicha = {
+                id: Date.now(),
+                nome: nome,
+                exercicios: []
+            };
+
+            fichas.push(novaFicha);
+            inputNome.value = '';
+            salvarDadosTreino();
+        }
+
+        function deletarFicha(id) {
+            if(confirm('Tem certeza que deseja excluir esta ficha inteira?')) {
+                fichas = fichas.filter(ficha => ficha.id !== id);
+                salvarDadosTreino();
+            }
+        }
+
+        function editarFicha(id) {
+            const ficha = fichas.find(f => f.id === id);
+            const novoNome = prompt('Digite o novo nome da ficha:', ficha.nome);
+            
+            if (novoNome !== null && novoNome.trim() !== '') {
+                ficha.nome = novoNome.trim();
+                salvarDadosTreino();
+            }
+        }
+
+        function adicionarExercicio(fichaId) {
+            const nomeInput = document.getElementById(`exNome_${fichaId}`);
+            const seriesInput = document.getElementById(`exSeries_${fichaId}`);
+            const repsInput = document.getElementById(`exReps_${fichaId}`);
+            const cargaInput = document.getElementById(`exCarga_${fichaId}`);
+
+            const nome = nomeInput.value.trim();
+            const series = seriesInput.value;
+            const reps = repsInput.value;
+            const carga = cargaInput.value;
+
+            if (nome === '' || series === '' || reps === '' || carga === '') {
+                alert('Preencha todos os campos do exercício, incluindo a carga!');
+                return;
+            }
+
+            const fichaIndex = fichas.findIndex(f => f.id === fichaId);
+            
+            fichas[fichaIndex].exercicios.push({
+                idExercicio: Date.now(),
+                nome: nome,
+                series: series,
+                reps: reps,
+                carga: carga
+            });
+
+            salvarDadosTreino();
+        }
+
+        function deletarExercicio(fichaId, idExercicio) {
+            const fichaIndex = fichas.findIndex(f => f.id === fichaId);
+            fichas[fichaIndex].exercicios = fichas[fichaIndex].exercicios.filter(ex => ex.idExercicio !== idExercicio);
+            salvarDadosTreino();
+        }
+
+        function renderizarFichas() {
+            const container = document.getElementById('containerFichas');
+            container.innerHTML = '';
+
+            if (fichas.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; color: #888; padding: 40px; background: white; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <h3>Nenhuma ficha cadastrada</h3>
+                        <p>Comece criando sua primeira ficha de treino acima!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            fichas.forEach(ficha => {
+                let listaExerciciosHTML = '';
+                if (ficha.exercicios.length === 0) {
+                    listaExerciciosHTML = `<p style="text-align: center; color: #888; font-size: 14px; margin: 15px 0;">Nenhum exercício adicionado ainda.</p>`;
+                } else {
+                    ficha.exercicios.forEach(ex => {
+                        listaExerciciosHTML += `
+                            <li>
+                                <div class="ex-nome">🏋️‍♂️ ${ex.nome}</div>
+                                <div class="ex-detalhes">
+                                    <span class="ex-badge">${ex.series} Séries</span>
+                                    <span class="ex-badge">${ex.reps} Reps</span>
+                                    <span class="ex-badge carga-destaque">${ex.carga} kg</span>
+                                </div>
+                                <button class="btn-danger" onclick="deletarExercicio(${ficha.id}, ${ex.idExercicio})">Excluir</button>
+                            </li>
+                        `;
+                    });
+                }
+
+                const cardFicha = `
+                    <div class="ficha-card">
+                        <div class="ficha-header">
+                            <h3>📋 ${ficha.nome}</h3>
+                            <div class="ficha-acoes">
+                                <button class="btn-edit" onclick="editarFicha(${ficha.id})">✏️ Renomear</button>
+                                <button class="btn-danger" onclick="deletarFicha(${ficha.id})">🗑️ Excluir Ficha</button>
+                            </div>
+                        </div>
+                        <div class="ficha-body">
+                            <div class="add-exercicio-form">
+                                <input type="text" id="exNome_${ficha.id}" placeholder="Exercício (Ex: Supino)">
+                                <input type="number" id="exSeries_${ficha.id}" class="num-input" placeholder="Séries" min="1">
+                                <input type="number" id="exReps_${ficha.id}" class="num-input" placeholder="Reps" min="1">
+                                <input type="number" id="exCarga_${ficha.id}" class="num-input" placeholder="Carga (kg)" min="0" step="0.5">
+                                <button onclick="adicionarExercicio(${ficha.id})">+ Add</button>
+                            </div>
+
+                            <ul class="exercicios-lista">
+                                ${listaExerciciosHTML}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardFicha;
+            });
+        }
+
+        // --- INICIALIZA A APLICAÇÃO ---
+        carregarInterface();
+    </script>
+</body>
+</html>
